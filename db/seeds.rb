@@ -10,6 +10,6 @@
   Recipient.create(first_name: "Friend", last_name: "#{i}", email: "friend#{i}@mail.com", snail_mail: "#{i} Aaron St. Los Angeles, CA 90026")
 end
 
-10.times do |i|
-  Present.create(name: "Present #{i}", cost: 12.50, recipient_id: "#{i}".to_i )
+Recipient.all.each do |recipient|
+  Present.create(name: "Present #{recipient.id}", cost: 12.50)
 end
