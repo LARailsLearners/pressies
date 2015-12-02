@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recipients</h1>
+
+<table>
+  <tbody>
+    <% @recipients.each do |recipient| %>
+      <tr>
+        <td><%= recipient.full_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recipient', new_recipient_path %>
