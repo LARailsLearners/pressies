@@ -1,24 +1,15 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @recipient.full_name %></h1>
+<ul>
+	<% @presents.each do |present| %>
+	  <% if @recipient.id == present.recipient_id %>
+	    <li><%= present.name %></li><br />
+	  <% end %>
+	<% end %>
+</ul>
 
-<p>
-  <strong>First name:</strong>
-  <%= @recipient.first_name %>
-</p>
+<p><%= @recipient.email %></p>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @recipient.last_name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @recipient.email %>
-</p>
-
-<p>
-  <strong>Snail mail:</strong>
-  <%= @recipient.snail_mail %>
-</p>
+<p><%= @recipient.snail_mail %></p>
 
 <%= link_to 'Edit', edit_recipient_path(@recipient) %> |
 <%= link_to 'Back', recipients_path %>
