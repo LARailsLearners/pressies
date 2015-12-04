@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @recipient.first_name %>
+</p>
+
+<%= link_to 'Edit', edit_recipient_path(@recipient) %> |
+<%= link_to 'Back', recipients_path %>
+
+
+<p>
+<%= @recipient.first_name %>
+  Presents:
+  <ul>
+    <% @recipient.presents.each do |present| %>
+      <li><%= present.present %></li>
+    <% end %>
+  </ul>
+</p>

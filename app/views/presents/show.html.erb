@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Present:</strong>
+  <%= @present.present %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @present.cost %>
+</p>
+
+<%= link_to 'Edit', edit_present_path(@present) %> |
+<%= link_to 'Back', presents_path %>
+
+<p>
+<%= @present.present %>
+  Recipients:
+  <ul>
+    <% @present.recipients.each do |recipient| %>
+      <li><%= recipient.first_name %></li>
+    <% end %>
+  </ul>
+</p>
