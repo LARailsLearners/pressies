@@ -1,15 +1,23 @@
 <%= form_for(@present) do |f| %>
-  <% if @present.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@present.errors.count, "error") %> prohibited this present from being saved:</h2>
+  <% @recipients.each do |recipient| %>
+    <%= recipient.first_name %>
+  <% end %>
 
-      <ul>
-      <% @present.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% @recipients.each do |recipient| %>
+    <div>
+      <%= check_box_tag "post[recipient_ids][]", recipient.id %>
+      <%= recipient.first_name %>
     </div>
   <% end %>
+
+  <div class="field">
+    <%= fields_for @recipient do |fp| %>
+      <%=fp.label :recipient %><br>
+      <%=fp.text_field :recipient %>
+    <% end %>
+  </div>
+
+
 
   <div class="field">
     <%= f.label :present %><br>

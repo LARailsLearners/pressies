@@ -6,15 +6,25 @@
 </p>
 
 <%= link_to 'Edit', edit_recipient_path(@recipient) %> |
-<%= link_to 'Back', recipients_path %>
+<%= link_to 'Back', recipients_path %> |
+<%= link_to 'Add New Present', new_present_path %>
 
+
+<h2>Presents</h2>
+<ul>
+  <% for basket in @recipient.baskets %>
+    <li><%=h basket.present %></li>
+  <% end %>
+</ul>
 
 <p>
 <%= @recipient.first_name %>
   Presents:
   <ul>
     <% @recipient.presents.each do |present| %>
-      <li><%= present.present %></li>
+      <li><%= present.presents %></li>
     <% end %>
   </ul>
 </p>
+
+

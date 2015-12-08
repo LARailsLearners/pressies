@@ -1,5 +1,6 @@
 class RecipientsController < ApplicationController
   before_action :set_recipient, only: [:show, :edit, :update, :destroy]
+  before_action :load_presents, only: [:new, :edit]
 
   # GET /recipients
   # GET /recipients.json
@@ -14,7 +15,7 @@ class RecipientsController < ApplicationController
 
   # GET /recipients/new
   def new
-    @recipient = Recipient.new
+    @recipient = Recipient.new({:first_name => "Kirk"})
     @present = Present.new
   end
 
@@ -26,10 +27,10 @@ class RecipientsController < ApplicationController
   # POST /recipients.json
   def create
     @recipient = Recipient.new(recipient_params)
-
+    @present = Present.new
     respond_to do |format|
-      if @recipient.save
-        format.html { redirect_to @recipient, notice: 'Recipient was successfully created.' }
+      if @recipient.save && @present.save
+        format.html { redirect_to @recipient, notice: 'Recipient and present was successfully created.' }
         format.json { render :show, status: :created, location: @recipient }
       else
         format.html { render :new }
@@ -56,6 +57,7 @@ class RecipientsController < ApplicationController
   # DELETE /recipients/1.json
   def destroy
     @recipient.destroy
+    @present.destroy
     respond_to do |format|
       format.html { redirect_to recipients_url, notice: 'Recipient was successfully destroyed.' }
       format.json { head :no_content }
@@ -70,6 +72,10 @@ class RecipientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def recipient_params
-      params.require(:recipient).permit(:first_name, present_id)
+      params.require(:recipient).permit(:first_name, :present_ids => [])
+    end
+
+    def load_presents
+      @presents = Present.all
     end
 end

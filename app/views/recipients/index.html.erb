@@ -25,3 +25,18 @@
 <br>
 
 <%= link_to 'New Recipient', new_recipient_path %>
+
+
+<% "Recipient List" %>
+
+<div id="recipients">
+<% for recipient in @recipients %>
+  <div class="recipent">
+    <p>
+      <strong><%=h recipient.first_name %></strong>
+      <%= link_to "Add Present", baskets_path(:present_id => recipient), :method => :post %>
+      <div class="clear"></div>
+    </p>
+  </div>
+<% end %>
+</div>

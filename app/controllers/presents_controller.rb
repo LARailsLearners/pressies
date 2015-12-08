@@ -1,10 +1,13 @@
 class PresentsController < ApplicationController
   before_action :set_present, only: [:show, :edit, :update, :destroy]
+  before_action :load_recipients, only: [:new, :edit]
+
 
   # GET /presents
   # GET /presents.json
   def index
     @presents = Present.all
+    @recipients = Recipient.all
   end
 
   # GET /presents/1
@@ -14,7 +17,9 @@ class PresentsController < ApplicationController
 
   # GET /presents/new
   def new
-    @present = Present.new
+    @present = Present.new({:present => "Toy"})
+    @recipient = Recipient.new
+
   end
 
   # GET /presents/1/edit
@@ -25,7 +30,7 @@ class PresentsController < ApplicationController
   # POST /presents.json
   def create
     @present = Present.new(present_params)
-
+    @recipient = Recipient.new
     respond_to do |format|
       if @present.save
         format.html { redirect_to @present, notice: 'Present was successfully created.' }
@@ -69,6 +74,10 @@ class PresentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def present_params
-      params.require(:present).permit(:present, :cost, :recipient_id)
+      params.require(:present).permit(:present, :cost, :recipient_ids => [])
+    end
+
+    def load_recipients
+      @recipients = Recipient.all
     end
 end

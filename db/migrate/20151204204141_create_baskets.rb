@@ -6,5 +6,8 @@ class CreateBaskets < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :baskets, :recipient_id
+    add_index :baskets, :present_id
+    add_index :baskets, :recipient_id
   end
 end
